@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: dictionary-server-service
+  namespace: dictionary-server
+spec:
+  selector:
+    app: dictionary-server
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
