@@ -41,7 +41,10 @@ kubectl apply -f varnish-ingress.yaml
 Patch the host used in the ingress for Varnish:
 
 ```bash
+# If you use the ingress addon for MicroK8s
 HOST=$(ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p').xip.io
+# If you use the NGINX Ingress https://kubernetes.github.io/ingress-nginx/
+HOST=$(kubectl get svc ingress-nginx-controller -n ingress-nginx -o jsonpath='{.status.loadBalancer.ingress[0].ip}').xip.io
 kubectl patch ingress varnish-ingress -n dictionary-server --type='json' -p="[{\"op\": \"replace\", \"path\": \"/spec/rules/0/host\", \"value\":\"${HOST}\"}]"
 ```
 
