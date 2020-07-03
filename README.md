@@ -4,13 +4,30 @@ This repo takes some of the example material from the book "Designing Distribute
 
 # TL;DR
 
+Assuming you are a developer using MicroK8s 1.18 with `ingress`, `dns` and `repository` components enabled, you can follow the workflows as per below.
+
+:warning: ensure IPv6 entries for `localhost` are disabled in `/etc/hosts` if you want access to the local repository to work :warning:
+
+## Building the Docker image and publishing it to the local image repository
+
 ```bash
 cd docker-build
 docker build -t dictionary-server .
 docker tag dictionary-server localhost:32000/dictionary-server
 docker push localhost:32000/dictionary-server
-curl -X GET http://localhost:32000/v2/_catalog
+```
 
+Check that the image was published:
+
+```bash
+curl -X GET http://localhost:32000/v2/_catalog
+```
+
+## Deploying the distributed system
+
+Note: `kubectl` would be an alias for `microk8s.kubectl` when working with MicroK8s.
+
+```bash
 cd ../k8s-deploy
 kubectl create ns dictionary-server
 kubectl apply -f dictionary-deploy.yaml
