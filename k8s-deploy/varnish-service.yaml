@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: varnish-service
+  namespace: dictionary-server
+spec:
+  selector:
+    app: varnish-cache
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
