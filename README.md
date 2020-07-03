@@ -35,4 +35,14 @@ kubectl apply -f dictionary-service.yaml
 kubectl create configmap varnish-config -n dictionary-server --from-file=default.vcl
 kubectl apply -f varnish-deploy.yaml
 kubectl apply -f varnish-service.yaml
+kubectl apply -f varnish-ingress.yaml
 ```
+
+Patch the host used in the ingress for Varnish:
+
+```bash
+HOST=example.com
+kubectl patch ingress varnish-ingress -n dictionary-server --type='json' -p="[{\"op\": \"replace\", \"path\": \"/spec/rules/0/host\", \"value\":\"${HOST}\"}]"
+```
+
+Now lookup a word's definition by accessing http://${HOST}/search/word
