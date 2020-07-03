@@ -6,7 +6,7 @@ This repo takes some of the example material from the book "Designing Distribute
 
 Assuming you are a developer using MicroK8s 1.18 with `ingress`, `dns` and `repository` components enabled, you can follow the workflows as per below.
 
-:warning: ensure IPv6 entries for `localhost` are disabled in `/etc/hosts` if you want access to the local repository to work :warning:
+Warning: Ensure IPv6 entries for `localhost` are disabled in `/etc/hosts` if you want access to the local repository to work :warning:
 
 ## Building the Docker image and publishing it to the local image repository
 
