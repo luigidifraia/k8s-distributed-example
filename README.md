@@ -45,7 +45,8 @@ Patch the host used in the ingress for Varnish:
 HOST=$(ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p').xip.io
 # If you use the NGINX Ingress https://kubernetes.github.io/ingress-nginx/
 HOST=$(kubectl get svc ingress-nginx-controller -n ingress-nginx -o jsonpath='{.status.loadBalancer.ingress[0].ip}').xip.io
-kubectl patch ingress varnish-ingress -n dictionary-server --type='json' -p="[{\"op\": \"replace\", \"path\": \"/spec/rules/0/host\", \"value\":\"${HOST}\"}]"
-```
 
-Now lookup a word's definition by accessing http://${HOST}/search/word
+kubectl patch ingress varnish-ingress -n dictionary-server --type='json' -p="[{\"op\": \"replace\", \"path\": \"/spec/rules/0/host\", \"value\":\"${HOST}\"}]"
+
+echo "Now lookup a word's definition by accessing the URL: http://${HOST}/search/word"
+```
