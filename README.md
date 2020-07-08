@@ -41,7 +41,6 @@ kubectl apply -f varnish-ingress.yaml
 Patch the host used in the ingress for Varnish, using [xip.io](http://xip.io/) to resolve custom domain names used for testing:
 
 ```bash
-# If you use the ingress addon for MicroK8s
 HOST=$(ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p').xip.io
 
 kubectl patch ingress varnish-ingress -n dictionary-server --type='json' -p="[{\"op\": \"replace\", \"path\": \"/spec/rules/0/host\", \"value\":\"${HOST}\"}]"
