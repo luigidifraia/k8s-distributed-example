@@ -1,6 +1,6 @@
 # Distributed Systems with Kubernetes
 
-This repo takes some of the example material from the book "Designing Distributed Systems", by Brendan Burns, and makes it available to use with Kubernetes 1.18.
+This repo takes some of the [example material](https://github.com/brendandburns/designing-distributed-systems) from the book "Designing Distributed Systems", by Brendan Burns, and makes it available to use with Kubernetes 1.18.
 
 Note: Feel free to use Docker Hub in order to publish and access your Docker images from multiple machines. However, for development purposes, when working on a single workstation you can also just use the local image repository. The use of an image repository is not strictly necessary for using the deployment material provided in this repo on a single workstation, but it gives users insights on how Docker images are deployed in a Kubernetes cluster made of multiple nodes.
 
