@@ -10,10 +10,11 @@ Warning: Ensure IPv6 entries for `localhost` are disabled in `/etc/hosts` if you
 
 ## Building the Docker image and publishing it to the local image repository
 
+Feel free to use Docker Hub in order to publish and access your Docker images from multiple machines. However, for development purposes, when working on a single workstation you can also just use the local image repository, available on `localhost:32000` when using MicroK8s. The use of an image repository is not strictly necessary for using the deployment material provided in this repo with MicroK8s, but it gives users insights on how Docker images are deployed in a Kubernetes cluster.
+
 ```bash
 cd docker-build
-docker build -t dictionary-server .
-docker tag dictionary-server localhost:32000/dictionary-server
+docker build -t localhost:32000/dictionary-server .
 docker push localhost:32000/dictionary-server
 ```
 
