@@ -38,15 +38,19 @@ kubectl apply -f varnish-service.yaml
 kubectl apply -f varnish-ingress.yaml
 ```
 
-Patch the host used in the ingress for Varnish:
+Patch the host used in the ingress for Varnish, using [xip.io](http://xip.io/) to resolve custom domain names used for testing:
 
 ```bash
 # If you use the ingress addon for MicroK8s
 HOST=$(ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p').xip.io
-# If you use the NGINX Ingress https://kubernetes.github.io/ingress-nginx/
-HOST=$(kubectl get svc ingress-nginx-controller -n ingress-nginx -o jsonpath='{.status.loadBalancer.ingress[0].ip}').xip.io
 
 kubectl patch ingress varnish-ingress -n dictionary-server --type='json' -p="[{\"op\": \"replace\", \"path\": \"/spec/rules/0/host\", \"value\":\"${HOST}\"}]"
 
 echo "Now lookup a word's definition by accessing the URL: http://${HOST}/search/word"
+```
+
+If you were to use the [NGINX Ingress](https://kubernetes.github.io/ingress-nginx/) instead of the `ingress` addon, you'd have to change the first command with:
+
+```bash
+HOST=$(kubectl get svc ingress-nginx-controller -n ingress-nginx -o jsonpath='{.status.loadBalancer.ingress[0].ip}').xip.io
 ```
