@@ -2,15 +2,17 @@
 
 This repo takes some of the example material from the book "Designing Distributed Systems", by Brendan Burns, and makes it available to use with Kubernetes 1.18.
 
+Note: Feel free to use Docker Hub in order to publish and access your Docker images from multiple machines. However, for development purposes, when working on a single workstation you can also just use the local image repository. The use of an image repository is not strictly necessary for using the deployment material provided in this repo on a single workstation, but it gives users insights on how Docker images are deployed in a Kubernetes cluster made of multiple nodes.
+
 # TL;DR
 
 Assuming you are a developer using MicroK8s 1.18 with `ingress`, `dns` and `repository` components enabled, you can follow the workflows as per below.
 
-Warning: Ensure IPv6 entries for `localhost` are disabled in `/etc/hosts` if you want access to the local repository to work :warning:
+Note: `kubectl` would be an alias for `microk8s.kubectl` when working with MicroK8s.
+
+Warning: Ensure IPv6 entries for `localhost` are disabled in `/etc/hosts` if you want access to the local repository to work.
 
 ## Building the Docker image and publishing it to the local image repository
-
-Feel free to use Docker Hub in order to publish and access your Docker images from multiple machines. However, for development purposes, when working on a single workstation you can also just use the local image repository, available on `localhost:32000` when using MicroK8s. The use of an image repository is not strictly necessary for using the deployment material provided in this repo with MicroK8s, but it gives users insights on how Docker images are deployed in a Kubernetes cluster.
 
 ```bash
 cd docker-build
@@ -25,8 +27,6 @@ curl -X GET http://localhost:32000/v2/_catalog
 ```
 
 ## Deploying the distributed system
-
-Note: `kubectl` would be an alias for `microk8s.kubectl` when working with MicroK8s.
 
 ```bash
 cd ../k8s-deploy
