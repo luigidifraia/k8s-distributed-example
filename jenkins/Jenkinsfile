@@ -1,0 +1,28 @@
+node {
+
+    checkout scm
+
+    env.DOCKER_API_VERSION="1.23"
+
+    sh "git rev-parse --short HEAD > commit-id"
+
+    tag = readFile('commit-id').replace("\n", "").replace("\r", "")
+    appName = "dictionary-server"
+    registryHost = "localhost:32000"
+    imageName = "${registryHost}/${appName}:${tag}"
+    env.BUILDIMG=imageName
+    env.BUILD_TAG=tag
+
+    stage "Build"
+
+        sh "docker build -t ${imageName} docker-build"
+
+    stage "Push"
+
+        sh "docker push ${imageName}"
+
+    stage "Deploy"
+
+        kubernetesDeploy configs: "k8s-deploy/*.yaml", kubeconfigId: 'kubeconfig'
+
+}
