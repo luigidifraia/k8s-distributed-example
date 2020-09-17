@@ -30,3 +30,9 @@ If you were to use the [NGINX Ingress](https://kubernetes.github.io/ingress-ngin
 ```bash
 HOST=$(kubectl get svc ingress-nginx-controller -n ingress-nginx -o jsonpath='{.status.loadBalancer.ingress[0].ip}').xip.io
 ```
+
+Retrieve the password to unlock Jenkins with:
+
+```bash
+kubectl -n jenkins exec $(kubectl get pod -n jenkins -l app=jenkins --no-headers -o=custom-columns='DATA:.metadata.name') -- cat /var/jenkins_home/secrets/initialAdminPassword
+```
