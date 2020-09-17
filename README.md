@@ -54,3 +54,21 @@ If you were to use the [NGINX Ingress](https://kubernetes.github.io/ingress-ngin
 ```bash
 HOST=$(kubectl get svc ingress-nginx-controller -n ingress-nginx -o jsonpath='{.status.loadBalancer.ingress[0].ip}').xip.io
 ```
+
+# Recommended setup
+
+It's recommended not to use the `ingress` component in MicroK8s and install the NGINX Ingress, which more closely matches a non-development environment:
+
+```bash
+microk8s.disable ingress
+microk8s.enable metallb
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/baremetal/deploy.yaml
+
+# As we have MetalLB available, we might change the service type to LoadBalancer
+kubectl patch svc ingress-nginx-controller -n ingress-nginx --type='json' -p='[{"op": "replace", "path": "/spec/type", "value":"LoadBalancer"}]'
+
+# In order to preserve the source IP address in HTTP requests sent to NGINX, it is necessary to use the Local traffic policy
+# See traffic policies here: https://metallb.universe.tf/usage/#traffic-policies
+kubectl patch svc ingress-nginx-controller -n ingress-nginx --type='json' -p='[{"op": "replace", "path": "/spec/externalTrafficPolicy", "value":"Local"}]'
+```
