@@ -12,9 +12,9 @@ Deploy Jenkins:
 ```bash
 cd k8s
 kubectl create ns jenkins
-kubectl apply -f jenkins-deployment.yaml --namespace jenkins
-kubectl apply -f jenkins-service.yaml --namespace jenkins
-kubectl apply -f jenkins-ingress.yaml --namespace jenkins
+kubectl apply -f jenkins-deployment.yaml
+kubectl apply -f jenkins-service.yaml
+kubectl apply -f jenkins-ingress.yaml
 ```
 
 Patch the host used in the ingress for Jenkins, using [xip.io](http://xip.io/) to resolve custom domain names used for testing:
