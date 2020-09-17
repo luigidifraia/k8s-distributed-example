@@ -45,3 +45,7 @@ microk8s config
 
 The actual config file is stored here: */var/snap/microk8s/current/credentials/client.config*
 
+# Known issues
+
+At the moment the continuous deployment pipeline is failing as per [this issue report](https://github.com/jenkinsci/kubernetes-cd-plugin/issues/134).
+
