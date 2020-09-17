@@ -8,7 +8,7 @@ metadata:
     nginx.ingress.kubernetes.io/add-base-url: "true"
 spec:
   rules:
-    - host: "10.21.14.21.xip.io"
+    - host: "10.21.14.144.xip.io"
       http:
         paths:
           - backend:
