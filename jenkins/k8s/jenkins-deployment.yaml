@@ -16,6 +16,7 @@ spec:
       containers:
       - name: jenkins
         image: localhost:32000/jenkins
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         env:
