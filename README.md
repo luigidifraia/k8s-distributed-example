@@ -72,3 +72,8 @@ kubectl patch svc ingress-nginx-controller -n ingress-nginx --type='json' -p='[{
 # See traffic policies here: https://metallb.universe.tf/usage/#traffic-policies
 kubectl patch svc ingress-nginx-controller -n ingress-nginx --type='json' -p='[{"op": "replace", "path": "/spec/externalTrafficPolicy", "value":"Local"}]'
 ```
+
+# Known issues
+
+At the moment the continuous deployment pipeline is failing as per [this issue report](https://github.com/jenkinsci/kubernetes-cd-plugin/issues/134).
+
