@@ -37,11 +37,11 @@ Retrieve the password to unlock Jenkins with:
 kubectl -n jenkins exec $(kubectl get pod -n jenkins -l app=jenkins --no-headers -o=custom-columns='DATA:.metadata.name') -- cat /var/jenkins_home/secrets/initialAdminPassword
 ```
 
-Get the kube config to use to create the `kubeconfig` credentials for the `kubernetes-cd` plugin in Jenkins:
+Get the kube config required to create the `kubeconfig` credentials used by the `kubernetes-cd` plugin in Jenkins:
 
 ```bash
 microk8s config
 ```
 
-The actual kubeconfig file is stored here: */var/snap/microk8s/current/credentials/client.config*
+The actual config file is stored here: */var/snap/microk8s/current/credentials/client.config*
 
