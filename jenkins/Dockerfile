@@ -28,10 +28,6 @@ RUN apt-get update && apt-get install -y \
 
 RUN usermod -a -G docker jenkins
 
-RUN mkdir -p /etc/docker/
-
-COPY docker-daemon.json /etc/docker/docker-daemon.json
-
 # From https://kubernetes.io/docs/tasks/tools/install-kubectl/
 
 # Kubectl installation
