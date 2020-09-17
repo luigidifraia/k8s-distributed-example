@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: jenkins-deployment
+  namespace: jenkins
 spec:
   replicas: 1
   selector:
@@ -17,6 +18,9 @@ spec:
         image: localhost:32000/jenkins
         ports:
         - containerPort: 8080
+        env:
+        - name: JENKINS_OPTS
+          value: --prefix=/jenkins
         volumeMounts:
         - name: jenkins-home
           mountPath: /var/jenkins_home

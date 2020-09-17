@@ -2,8 +2,10 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: jenkins
+  namespace: jenkins
   annotations:
     kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/add-base-url: "true"
 spec:
   rules:
     - host: "10.21.14.21.xip.io"
@@ -12,4 +14,4 @@ spec:
           - backend:
               serviceName: jenkins
               servicePort: 8080
-            path: /
+            path: /jenkins
