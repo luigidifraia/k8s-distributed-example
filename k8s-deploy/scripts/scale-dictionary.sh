@@ -7,6 +7,6 @@ fi
 
 replica_count=$1
 
-kubectl patch deployment dictionary-server \
+kubectl scale deployment dictionary-server \
   --namespace dictionary-server \
-  -p "{\"spec\": {\"replicas\": ${replica_count}}}"
+  --replicas ${replica_count} --record
