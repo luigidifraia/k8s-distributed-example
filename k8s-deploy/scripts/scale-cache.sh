@@ -7,6 +7,6 @@ fi
 
 replica_count=$1
 
-kubectl patch deployment varnish-cache \
+kubectl scale deployment varnish-cache \
   --namespace dictionary-server \
-  -p "{\"spec\": {\"replicas\": ${replica_count}}}"
+  --replicas ${replica_count} --record
